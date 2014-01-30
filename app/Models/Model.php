@@ -12,5 +12,9 @@ private $dB;
     return new \DB\SQL\Mapper($this->dB,$table);
   }
   
+  protected function logdB(){
+    return $this->dB->log();
+  }
+  
 }
 ?>

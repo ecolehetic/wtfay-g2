@@ -25,6 +25,12 @@ class App_controller extends Controller{
     $this->tpl['async']='partials/users.html';
   }
   
+  public function favorite($f3){
+    $status=$this->model->favorite(array('favId'=>$f3->get('PARAMS.favId'),'logId'=>1));
+    echo json_encode(array('status'=>$status));
+    exit;
+  }
+  
   
   
   
