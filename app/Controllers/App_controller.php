@@ -21,7 +21,7 @@ class App_controller extends Controller{
   }
   
   public function searchUsers($f3){
-    $f3->set('users',$this->model->searchUsers(array('keywords'=>$f3->get('POST.name'))));
+    $f3->set('users',$this->model->searchUsers(array('keywords'=>$f3->get('POST.name'),'filter'=>$f3->get('POST.filter'))));
     $this->tpl['async']='partials/users.html';
   }
   

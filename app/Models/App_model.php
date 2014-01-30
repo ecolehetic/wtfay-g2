@@ -21,7 +21,9 @@ private $mapper;
  }
  
  public function searchUsers($params){
-   return $this->mapper->find('firstname like "%'.$params['keywords'].'%" or lastname  like "%'.$params['keywords'].'%"');
+   $query='(firstname like "%'.$params['keywords'].'%" or lastname  like "%'.$params['keywords'].'%")';
+   $query.=$params['filter']?' and promo="'.$params['filter'].'"':'';
+   return $this->mapper->find($query);
  }
   
   
