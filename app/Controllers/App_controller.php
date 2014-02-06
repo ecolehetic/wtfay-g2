@@ -16,7 +16,7 @@ class App_controller extends Controller{
   }
   
   public function getUser($f3){
-    $f3->set('user',$this->model->getUser(array('userId'=>$f3->get('PARAMS.userId'))));
+    $f3->set('user',$this->model->getUser(array('id'=>$f3->get('PARAMS.id'))));
     $this->tpl['async']='partials/user.html';
   }
   
@@ -28,6 +28,11 @@ class App_controller extends Controller{
   public function favorite($f3){
     $f3->set('status',$this->model->favorite(array('favId'=>$f3->get('PARAMS.favId'),'logId'=>1)));
     $this->tpl['async']='json/status.json';
+  }
+  
+  public function getFavorite($f3){
+    $f3->set('users',$this->model->getFavorite(array('logId'=>1)));
+    $this->tpl['async']='partials/users.html';
   }
   
   

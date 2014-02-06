@@ -13,17 +13,18 @@ private $mapper;
  }
 
  public function getUsers($params){
-   return $this->mapper->find(array('promo=?',$params['promo']),array('order'=>'lastname'));
+   //$this->dB->exec("select * from wifiloc left join wififav on wifiloc.id=wififav.favId");
+   return $this->getMapper('favorite')->find(array('promo=?',$params['promo']),array('order'=>'lastname'));
  }
  
  public function getUser($params){
-   return $this->mapper->load(array('userId=?',$params['userId']));
+   return $this->mapper->load(array('id=?',$params['id']));
  }
  
  public function searchUsers($params){
    $query='(firstname like "%'.$params['keywords'].'%" or lastname  like "%'.$params['keywords'].'%")';
    $query.=$params['filter']?' and promo="'.$params['filter'].'"':'';
-   return $this->mapper->find($query);
+   return $this->getMapper('favorite')->find($query,array('order'=>'lastname'));
  }
  
  public function favorite($params){
@@ -39,6 +40,10 @@ private $mapper;
     return false;
   }
   
+ }
+ 
+ public function getFavorite($params){
+  return $this->getMapper('favorite')->find(array('logId=?',$params['logId']));
  }
   
   
