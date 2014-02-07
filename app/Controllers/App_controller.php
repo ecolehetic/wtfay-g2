@@ -35,6 +35,44 @@ class App_controller extends Controller{
     $this->tpl['async']='partials/users.html';
   }
   
+  public function getIssues($f3){
+    $web=new \Web();
+    $token='e43b804c8d86a44abb25e827379b3b2216273c61';
+    $header=array(
+      'header'=>array(
+        'Authorization: token '.$token
+        )
+      );
+    $result=$web->request('https://api.github.com/repos/ecolehetic/wtfay-g2/issues',$header);
+    if($result['body']){
+      print_r($result);
+    }
+    exit;
+  }
+  
+  public function setIssue($f3){
+    $web=new \Web();
+    $token='e43b804c8d86a44abb25e827379b3b2216273c61';
+    $content=array(
+      'title'=>'Gros bug',
+      'body'=>"t'es trop noob...",
+      'labels'=>array('bug')
+      );
+    
+    $header=array(
+      'header'=>array('Authorization: token '.$token),
+      'method'=>'POST',
+      'content'=>json_encode($content)
+      );
+    $result=$web->request('https://api.github.com/repos/ecolehetic/wtfay-g2/issues',$header);
+    if($result['body']){
+      print_r($result);
+    }
+    exit;
+  }
+  
+  
+  
   
   
   

@@ -1,0 +1,15 @@
+{
+"header":[],
+"body":[
+<?php if(isset($datas)):?>
+<?php foreach($datas as $data):?>
+{
+"firstname":"<?php echo $data->firstname ?>",
+"lastname":"<?php echo $data->lastname ?>",
+"id":"<?php echo $data->id ?>",
+"url":"<?php echo 'http://localhost/wtfay-g2/api/users/'.$data->id; ?>"
+},
+<?php endforeach;?>
+<?php endif;?>
+]
+}
