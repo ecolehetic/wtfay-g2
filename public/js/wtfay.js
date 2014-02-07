@@ -1,3 +1,12 @@
+$.ajax({
+	'url':'api/users',
+	'dataType':'json',
+	'method':'POST'
+})
+.success(function(data){
+	console.log(data); 
+})
+
 $('.index a').on('click',function(e){
 	e.preventDefault();
 	$('input[name="name"]').focus();
