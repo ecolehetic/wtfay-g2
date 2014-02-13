@@ -76,7 +76,7 @@ user.addEventListener('drop',function(e){
 	for(i in files){
 		datas.append('file'+i,files[i]);
 	}
-	var xhr = new XMLHttpRequest();
+	/*var xhr = new XMLHttpRequest();
   xhr.open('POST', 'upload/');
 	xhr.onload = function () {
 	  if(xhr.status === 200) {
@@ -85,7 +85,17 @@ user.addEventListener('drop',function(e){
 	    console.log('error');
 	  }
 	}
-	xhr.send(datas);
+	xhr.send(datas);*/
+	$.ajax({
+		url:'upload/',
+		type:'POST',
+		data:datas,
+		processData:false,
+		contentType:false
+	})
+	.success(function(datas){
+		console.log('ok'); 
+	})
 	
 })
 
