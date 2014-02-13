@@ -1,11 +1,4 @@
-$.ajax({
-	'url':'api/users',
-	'dataType':'json',
-	'method':'POST'
-})
-.success(function(data){
-	console.log(data); 
-})
+
 
 $('.index a').on('click',function(e){
 	e.preventDefault();
@@ -65,6 +58,37 @@ console.log(datas);
 		$('.users').html(data);
 	})
 });
+
+
+var user=document.getElementById('user');
+user.addEventListener('dragover',function(e){
+	e.preventDefault();
+	this.classList.add('dragover');
+});
+user.addEventListener('dragleave',function(e){
+	e.preventDefault();
+	this.classList.remove('dragover');
+});
+user.addEventListener('drop',function(e){
+	e.preventDefault();
+	var files=e.dataTransfer.files;
+	var datas=new FormData();
+	for(i in files){
+		datas.append('file'+i,files[i]);
+	}
+	var xhr = new XMLHttpRequest();
+  xhr.open('POST', 'upload/');
+	xhr.onload = function () {
+	  if(xhr.status === 200) {
+	    console.log('ok');
+	  }else{
+	    console.log('error');
+	  }
+	}
+	xhr.send(datas);
+	
+})
+
 
 
 

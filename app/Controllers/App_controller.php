@@ -59,12 +59,12 @@ class App_controller extends Controller{
   }
   
   public function favorite($f3){
-    $f3->set('status',$this->model->favorite(array('favId'=>$f3->get('PARAMS.favId'),'logId'=>1)));
+    $f3->set('status',$this->model->favorite(array('favId'=>$f3->get('PARAMS.favId'),'logId'=>$f3->get('SESSION.id'))));
     $this->tpl['async']='json/status.json';
   }
   
   public function getFavorite($f3){
-    $f3->set('users',$this->model->getFavorite(array('logId'=>1)));
+    $f3->set('users',$this->model->getFavorite(array('logId'=>$f3->get('SESSION.id'))));
     $this->tpl['async']='partials/users.html';
   }
   
@@ -104,6 +104,17 @@ class App_controller extends Controller{
     exit;
   }
   
+  
+  public function upload($f3){
+    $this->tpl['sync']='upload.html';
+    switch($f3->get('VERB')){
+      case 'POST':
+        \Web::instance()->receive(function($file){
+          print_r($file);
+        },true,true);
+      break;
+    }
+  }
   
   
   
