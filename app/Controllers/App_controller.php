@@ -6,6 +6,39 @@ class App_controller extends Controller{
     $this->tpl=array('sync'=>'main.html');
   }
   
+  public function signin($f3){
+    switch($f3->get('VERB')){
+      case 'GET':
+        $this->tpl['sync']='signin.html';
+      break;
+      case 'POST':
+        $auth=$this->model->signin(array(
+          'login'=>$f3->get('POST.login'),
+          'password'=>$f3->get('POST.password')
+        ));
+        if(!$auth){
+          $f3->set('error',$f3->get('loginError'));
+          $this->tpl['sync']='signin.html';
+        }else{
+          $user=array(
+            'id'=>$auth->id,
+            'firstname'=>$auth->firstname,
+            'lastname'=>$auth->lastname
+          );
+          $f3->set('SESSION',$user);
+          $f3->reroute('/');
+        }
+      break;
+    }
+  }
+  
+  public function signout($f3){
+    session_destroy();
+    $f3->reroute('/signin');
+  }
+  
+  
+  
   public function home($f3){
     
   }

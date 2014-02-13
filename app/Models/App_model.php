@@ -45,6 +45,10 @@ private $mapper;
  public function getFavorite($params){
   return $this->getMapper('favorite')->find(array('logId=?',$params['logId']));
  }
+ 
+ function signin($params){
+  return $this->mapper->load(array('userId=?',$params['login']));
+ }
   
   
   
