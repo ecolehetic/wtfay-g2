@@ -97,7 +97,29 @@ user.addEventListener('drop',function(e){
 		console.log('ok'); 
 	})
 	
-})
+});
+
+var messenger={
+	init : function(){
+		this.socket = io.connect('http://macbook-maraboutee.local:8080');
+		this.socket.emit('log',{user:1});
+		this.listen();
+	},
+	listen : function(){
+		this.socket.on('logged',function(datas){
+			console.log('socket id:'+datas); 
+		});
+		this.socket.on('message',function(datas){
+			console.log(datas); 
+		});
+	},
+	sendMessage : function(datas){
+		this.socket.emit('message',datas);
+	}
+}
+messenger.init();
+var message={from:1,to:1,message:'Salut !'};
+messenger.sendMessage(message);
 
 
 
